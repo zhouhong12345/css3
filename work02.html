@@ -1,1 +1,115 @@
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Page Title</title>
+    </head>
+    <style> 
+         #w{
+             width:370px;
+             height: 190px;
+             border: 1px solid lightgrey;
+         }
+         #s{
+             width: 320px;
+             height: 42px;
+         }
+        #a{
+            width: 320px;
+            height: 100px; 
+            float: left;
+            overflow: hidden; 
+        }
+        .delete{
+            background-color :lightgrey;
+            color: white;
+            font-size: 17px;
+            width:22px;
+            height: 22px;
+            text-align: center;
+            opacity:5;
+            border: 0px;
+            float: left;
+            margin-top: 79px;
+            margin-left: 8px;
+        }
+        #d{
+            background-color:lightgrey;
+            float: left;
+            margin-right: 9px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        #b{
+            width:170px;
+            height:35px;
+            float: left;
+        }
+        #b:focus{
+            outline: none;
+            border:2px solid #ebb463;
+        }
+        #c{
+            width: 140px;
+            height: 35px;
+            color:grey;
+            float: left;
+            margin-top: 4px;
+            margin-left: 4px;
+        }
+        .q{
+            float: left;
+            font-size: 15px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        #u{
+            background-color:darkorange;
+        }
+    </style>
+    <body>
+        <div id="w">
+                <div id="s">
+                        <input type="text" id="b" placeholder="请输入想查找的商品" autofocus>
+                        <button id="c" onclick="search()" >
+                            搜索
+                        </button></br>
+                </div>
+                <p class="q">最近搜索</p></br>
+                <div id="a">    
+                </div>
+                <button class="delete" onclick="deleteText()">X</button>
+        </div>
+    </body>
+    <script>
+        function search(){
+            var text=document.getElementById("b").value;
+            var div2=document.getElementById("a");
+            var time = new Date().getTime();
+            localStorage.setItem(time,text);
+            var getValue=localStorage.getItem(time);
+            var add=document.createElement("div");
+            div2.appendChild(add);
+            add.setAttribute("id","d");
+            var text2=document.createTextNode(getValue); 
+            add.appendChild(text2);
+        }
+        window.onload=function(){
+            var div2=document.getElementById("a");
+            for(var i=0;i<localStorage.length;i++){
+                var key=localStorage.key(i);
+                var getValue=localStorage.getItem(key);
+                var add=document.createElement("div");
+                div2.appendChild(add);
+                add.setAttribute("id","d");
+                var text2=document.createTextNode(getValue); 
+                add.appendChild(text2);
+            }
+        }
+        function deleteText(){
+            var div2=document.getElementById("a");
+            localStorage.clear();
+            div2.innerHTML="";
+        }
+    </script>
+</html>
