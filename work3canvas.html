@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Page Title</title>
+    </head>
+    <style> 
+        canvas{
+            border:1px solid pink;
+        }
+    </style>
+    <body>
+        <canvas id='canvas' width="308" height='213'"> 
+    </body>
+    <script>
+        window.onload=function(){
+            var canvas=document.getElementById('canvas');
+            var context=canvas.getContext('2d');
 
+            var fruit=['jvzi','caomei'];
+            console.log(fruit[Math.floor(Math.random()*fruit.length)]);
+            var a=document.getElementById("canvas");
+            a.style.backgroundImage="url(image/"+fruit[Math.floor(Math.random()*fruit.length)]+".png)";
+
+            context.fillStyle='gray';
+            context.fillRect(0,0,308,213);//目标 
+
+            var i=false;
+            canvas.addEventListener('mousemove',move);
+            canvas.addEventListener('mousedown',click);
+            canvas.addEventListener('mouseup',up);
+            function click(){
+                event.preventDefault();
+                i=true;
+            }
+            function move(event){
+                event.preventDefault();
+                if(i){
+                    x=event.offsetX;
+                    y=event.offsetY;
+                    context.beginPath();
+                    context.globalCompositeOperation='destination-out';
+                    context.fillStyle='white';   
+                    context.arc(x,y,40,0,2*Math.PI);
+                    context.fill();
+                    context.closePath();  
+                    check();
+                }         
+            }
+            function up(){
+                event.preventDefault();
+                i=false;
+            }
+            function check(){
+                var b=0;
+                var imgData=context.getImageData(0,0,308,213);
+                var data=imgData.data;
+                for(var m=0;m<data.length;m+=4){
+                    var alpha=data[m+3];
+                    if(alpha<5){
+                        b++;
+                    }
+                }
+                var perc=b/(data.length/4);
+                if(perc>0.85){
+                    clear();
+                }
+            }
+            function clear(){
+                context.clearRect(0,0,308,213);
+            }
+        }
+    </script>
+</html>
