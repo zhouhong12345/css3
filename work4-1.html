@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Page Title</title>
+    </head>
+    <style> 
+        #big{
+            width: 400px;
+            height: 450px;
+            border: 1px solid black;
+            margin: 0 auto;
+            position:relative;
+        }
+        .small{
+            width: 400px;
+            height: 250px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+        #smallDiv{
+            width: 400px;
+            height: 250px;
+            position: absolute;
+            top: 0;
+            left: 0;    
+        }
+        #circle{
+            width: 50px;
+            height: 40px;
+            border-radius: 50px;
+            background: coral;
+            position: absolute;
+            right:20px;
+            top:20px;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 10px;
+        } 
+        #circle p{
+            margin: 0px;
+        }
+        #img{
+            width: 400px;
+            height: 250px;
+        }
+        #white{
+            width: 400px;
+            height: 160px;
+            float: left; 
+            position: relative;
+            /* background:rgb(108, 211, 252); */
+            background: white;
+        }
+        #whiteOne{
+            width: 380px;
+            height: 90px;
+            /* background:yellow; */
+            float: left;
+            padding-left: 20px;
+        }
+        @keyframes inColor{
+            0%{
+                opacity: 0;
+            }
+            50%{
+                opacity: 0.5;
+                color:gray;
+            }
+            100%{
+                opacity: 1;
+                color:gray;
+            }     
+        }
+        @keyframes outColor {
+            0%{
+                opacity: 1;
+                color:gray;
+            }
+            50%{
+                opacity: 0.5;
+                color:gray;
+            }
+            100%{
+                opacity: 0;
+            }
+        }
+        #whiteTwo{
+            opacity: 0;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: justify;
+            color:gray;
+        }
+        #little{
+            width:60px;
+            height: 30px;
+            background: coral;
+            color: white;
+            position:absolute;
+            top:-30px;
+            left: 0;
+            text-align: center;
+            line-height: 30px;
+            font-size: 13px;
+        }   
+        #fix{
+            width: 380px;
+            height: 40px;
+            position: absolute;
+            bottom: 0;
+            padding-left: 20px;
+            font-size: 12px;
+            color:gray;
+        }
+        .a{
+            margin:20px 0 0 0;
+        }
+        .b{
+            margin-top:10px;
+            color: coral;
+        }    
+    </style>
+    <body>
+        <div id='big'>
+            <div class="small">
+                <img src='image1/zhanqiao.jpg' id='img'>
+                <div id='smallDiv'></div>
+                <div id='circle'>  
+                    <p>15</p>
+                    <p>五月</p>
+                </div>
+            </div>
+            <div id='white'>
+                <div id='little'>照片</div>
+                <div id='whiteOne'>
+                    <h2 class='a'>青岛栈桥</h2>
+                    <p class='b'>国家AAAA级旅游景区</p>
+                </div>
+                <div id='whiteTwo'>
+                    青岛客栈是青岛海滨景区的景点之一，是国务院于1982年首批公布的国家级风景名胜区。
+                    青岛栈桥位于游人如织的青岛中山路南端，
+                    桥身从海岸探入如弯月般的青岛湾深处。桥身供游人参观并在此停靠旅游船，由此乘船可看海上青岛。
+                </div>
+            </div>
+            
+            <div id='fix'>
+                <p>10分钟前  &nbsp&nbsp&nbsp123评论</p>
+            </div>
+        </div>
+    </body>
+    <script>
+        var white=document.getElementById('white');
+        var big=document.getElementById('big');
+        var img=document.getElementById('img');
+        var smallDiv=document.getElementById('smallDiv');
+
+        white.onmouseover=function() {
+            moveIn();
+            changeIn();
+        }
+        white.onmouseout=function(){
+            moveOut();
+            changeOut();   
+        }   
+        function moveIn(){
+            white.style.transform='translateY(-90px)';
+            white.style.height='250px';
+            white.style.transition='transform 0.5s ease,height 0.5s';
+
+            whiteTwo.style.opacity='1';
+            whiteTwo.style.animationName='inColor';
+            whiteTwo.style.animationDuration='0.5s';
+
+            smallDiv.style.background='rgb(77,77,77,0.5)';
+            smallDiv.style.transition='background 0.5s';
+            
+            big.style.boxShadow='0px 0px 10px gray';
+            big.style.transition='boxShadow 0.5s';
+        } 
+        function moveOut(){
+            white.style.transform='translateY(0px)';
+            white.style.height='160px';  
+            // setTimeout(function(){
+            //     whiteTwo.style.display='none';
+            // },500);
+            
+            whiteTwo.style.opacity='0';
+            whiteTwo.style.animationName='outColor';
+            whiteTwo.style.animationDuration='0.5s';
+
+            smallDiv.style.background='none';
+            big.style.boxShadow='0px 0px';
+        }
+        function changeIn(){
+            img.style.transform='scale(1.2)';
+            img.style.transition='transform 0.5s ease';
+        }
+        function changeOut(){
+            img.style.transform='scale(1)';
+        }
+    </script>
+</html>
